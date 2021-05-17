@@ -1,17 +1,130 @@
-
-<div class="row justify-content-md-center p-5 ">
-  <div class="col-md-6">
+<form [formGroup]="form">
+  <div class="row justify-content-md-center p-5 ">
+    <div class="col-md-6">
       <div class="input-group mb-3">
-          <input type="text" class="form-control"
-              placeholder="Pesquisa por ( Título do livro) "
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2">
-          <div class="input-group-append">
-              <button class="btn btn-success" type="button" id="button-addon2" >
-                  <i class="fa fa-search"></i>
-              </button>
-          </div>
+        <input type="text" class="form-control" placeholder="Search Google Books" aria-label="Recipient's username"
+          formControlName="search" aria-describedby="button-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-success" type="button" id="button-addon2" title="Seach" (click)="searchBooks()">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
       </div>
+    </div>
+    <div class="col-md-1">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" formControlName="favorite">
+        <label class="form-check-label" for="flexCheckDefault">
+          Favorite
+        </label>
+      </div>
+    </div>
   </div>
-</div>
 
+  <app-card-empty *ngIf="items.length > 0"  title="Book Cards">
+    <div class="row">
+      <div class="col" *ngFor="let item of items">
+        <div class="card m-5" style="width: 18rem;">
+          <img src="{{item.image}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">
+              - Title: {{item.title}} <br>
+              - Authors: {{item.authors}}
+              <br>
+              - Date Publish: {{item.publishedDate | date: 'dd/MM/yyyy'}}
+            </p>
+            <div class="row">
+              <div class="col-md-4 ms-auto">
+                <a class="btn btn-outline-success" (click)="addFavorite(item)">
+                  <i *ngIf="!item.favorite" title="favorite" class="fa fa-heart-o"></i>
+                  <i *ngIf="item.favorite" title="remove favorite" class="fa fa-heart"></i>
+                </a>
+              </div>
+              <div class="col-md-4 ms-auto">
+                <a class="btn btn-outline-success " (click)="openModal(m, item)" title="More Detals"><i
+                    class="fa fa-list"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </app-card-empty>
+ <app-card-empty class="p-2" [headerShow]="false" *ngIf="totalItems > 9" >
+  <div class="col-md-12">
+    <div class="row ">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <div *ngFor="let item of pages">
+            <li class="page-item"  ><a class="page-link" (click)="getPage(item)">{{item}}</a></li>
+          </div>
+          <li class="page-item">
+            <a class="page-link" (click)="getNextPage()">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+</div>
+ </app-card-empty>
+</form>
+<ng-template #m let-modal>
+  <div class="modal-header">
+    <div class="row">
+      <div class="col">
+        <img src="{{selectedBook.image}}" class="modal-img-top" alt="...">
+      </div>
+    </div>
+  </div>
+  <div class="modal-body">
+    <app-card-empty title="Detals">
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Authors: </label>
+          <input type="text" class="form-control" value="{{selectedBook.authors}}" disabled>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Title: </label>
+          <input type="text" class="form-control" value="{{selectedBook.title}}" disabled>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Published Date: </label>
+          <input type="text" class="form-control" value="{{selectedBook.publishedDate | date: 'dd/MM/yyyy'}}"
+            disabled>
+        </div>
+        <div class="col">
+          <label class="form-label">Language: </label>
+          <input type="text" class="form-control" value="{{selectedBook.language}}" disabled>
+        </div>
+        <div class="col">
+          <label class="form-label">Categories: </label>
+          <input type="text" class="form-control" value="{{selectedBook.categories}}" disabled>
+        </div>
+      </div>
+    </app-card-empty>
+    <app-card-empty [headerShow]="false">
+      <div class="row justify-content-between">
+        <div class="col-md-4">
+          <button [disabled]="selectedBook.pdf === undefined" type="button" class="btn btn-outline-success" (click)="download(selectedBook)" title="Donwload PDF">
+            <i class="fa fa-download"></i>
+          </button>
+        </div>
+        <div class="col-md-2 ">
+          <button type="button" class="btn btn-outline-success" (click)="preview(selectedBook)" title=" Go to Goole Books">
+            <i class="fa fa-external-link"></i>
+          </button>
+        </div>
+      </div>
+    </app-card-empty>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+  </div>
+</ng-template>
