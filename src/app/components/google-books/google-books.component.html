@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <app-card-empty *ngIf="items.length > 0"  title="Book Cards">
+  <app-card-empty *ngIf="items.length > 0" title="Book Cards">
     <div class="row">
       <div class="col" *ngFor="let item of items">
         <div class="card m-5" style="width: 18rem;">
@@ -51,25 +51,25 @@
       </div>
     </div>
   </app-card-empty>
- <app-card-empty class="p-2" [headerShow]="false" *ngIf="totalItems > 9" >
-  <div class="col-md-12">
-    <div class="row ">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          <div *ngFor="let item of pages">
-            <li class="page-item"  ><a class="page-link" (click)="getPage(item)">{{item}}</a></li>
-          </div>
-          <li class="page-item">
-            <a class="page-link" (click)="getNextPage()">Next</a>
-          </li>
-        </ul>
-      </nav>
+  <app-card-empty class="p-2" [headerShow]="false" *ngIf="totalItems > 9">
+    <div class="col-md-12">
+      <div class="row ">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <div *ngFor="let item of pages">
+              <li class="page-item"><a class="page-link" (click)="getPage(item)">{{item}}</a></li>
+            </div>
+            <li class="page-item">
+              <a class="page-link" (click)="getNextPage()">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-</div>
- </app-card-empty>
+  </app-card-empty>
 </form>
 <ng-template #m let-modal>
   <div class="modal-header">
@@ -96,8 +96,7 @@
       <div class="row">
         <div class="col">
           <label class="form-label">Published Date: </label>
-          <input type="text" class="form-control" value="{{selectedBook.publishedDate | date: 'dd/MM/yyyy'}}"
-            disabled>
+          <input type="text" class="form-control" value="{{selectedBook.publishedDate | date: 'dd/MM/yyyy'}}" disabled>
         </div>
         <div class="col">
           <label class="form-label">Language: </label>
@@ -112,12 +111,14 @@
     <app-card-empty [headerShow]="false">
       <div class="row justify-content-between">
         <div class="col-md-4">
-          <button [disabled]="selectedBook.pdf === undefined" type="button" class="btn btn-outline-success" (click)="download(selectedBook)" title="Donwload PDF">
+          <button [disabled]="selectedBook.pdf === undefined" type="button" class="btn btn-outline-success"
+            (click)="download(selectedBook)" title="Donwload PDF">
             <i class="fa fa-download"></i>
           </button>
         </div>
         <div class="col-md-2 ">
-          <button type="button" class="btn btn-outline-success" (click)="preview(selectedBook)" title=" Go to Goole Books">
+          <button type="button" class="btn btn-outline-success" (click)="preview(selectedBook)"
+            title=" Go to Goole Books">
             <i class="fa fa-external-link"></i>
           </button>
         </div>

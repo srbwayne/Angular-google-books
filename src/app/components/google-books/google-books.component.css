@@ -1,7 +1,7 @@
 img.card-img-top {
   border: 5px solid #19d276;
-  max-width:100%;
-  max-height:100%;
+  max-width: 100%;
+  max-height: 100%;
   width: auto;
   height: 300px;
 }

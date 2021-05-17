@@ -1,10 +1,12 @@
-import { BookItem } from './../../shared/model/google-books';
-import { GoogleBooksService } from './google-books-api.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { BookItem } from './../../shared/model/google-books';
+import { GoogleBooksService } from './google-books-api.service';
 
 
 @Component({

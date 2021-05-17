@@ -48,7 +48,6 @@ export class GoogleBooksService {
   }
 
   private prebuildModelResult(data: GoogleBooksResult, favoritesBooks: Map<string, BookItem>): BookItemsResult {
-    console.log(data);
     const booksResult: BookItemsResult = {
       totalItems: 0
     };
@@ -71,11 +70,11 @@ export class GoogleBooksService {
       book.authors = item.volumeInfo && item.volumeInfo.authors
         && item.volumeInfo.authors.length ? item.volumeInfo.authors.join(', ') : undefined;
       book.categories = item.volumeInfo && item.volumeInfo.categories
-      && item.volumeInfo.categories.length ? item.volumeInfo.categories.join(', ') : undefined;
+        && item.volumeInfo.categories.length ? item.volumeInfo.categories.join(', ') : undefined;
       book.language = item.volumeInfo && item.volumeInfo.language
-      && item.volumeInfo.language ? item.volumeInfo.language : undefined;
+        && item.volumeInfo.language ? item.volumeInfo.language : undefined;
       book.publishedDate = item.volumeInfo && item.volumeInfo.publishedDate
-      && item.volumeInfo.publishedDate ? item.volumeInfo.publishedDate : undefined;
+        && item.volumeInfo.publishedDate ? item.volumeInfo.publishedDate : undefined;
       return book;
     });
   }

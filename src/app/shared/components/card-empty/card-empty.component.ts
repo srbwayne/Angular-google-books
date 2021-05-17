@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import * as animat from '../../app-animaitions';
 
 @Component({
     selector: 'app-card-empty',
